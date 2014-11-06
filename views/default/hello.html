@@ -1,0 +1,53 @@
+{{extend 'layout.html'}}
+
+
+<div>
+<h1> hi </h1>
+<h2> hello world </h2>
+<h3> h3 </h3>
+
+<p> test text to be change </p>
+
+<button>Send an HTTP GET request to a page and get the result back</button>
+
+<div id='mycontent'>
+</div>
+
+</div>
+
+
+<script src="{{=URL('static','js/anchorific.min.js')}}"></script>
+<script>
+
+</script>
+
+
+<script>
+
+$(document).ready(function() {
+	$('button').click(function(){
+		url = "http://127.0.0.1:8000/test/default/api/person/321";
+		$.get(url, function(data){
+			d2 = JSON.parse(data);
+			//alert(d2.mycontent);
+			//$('#mycontent').html(d2.mycontent);
+		});
+	});
+
+$('.content').anchorific({
+    navigation: '.anchorific', // position of navigation
+	speed: 200, // speed of sliding back to top
+	anchorClass: 'anchor', // class of anchor links
+	anchorText: '#', // prepended or appended to anchor headings
+	top: '.top', // back to top button or link class
+	spy: true, // highlight active links as you scroll
+	position: 'append' // position of anchor text
+});
+
+});
+
+
+
+
+
+</script>
