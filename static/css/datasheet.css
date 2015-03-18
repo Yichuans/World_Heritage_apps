@@ -1,0 +1,27 @@
+#doc_navi ul {
+  margin-left: 0;
+  padding: 10px;
+
+}
+
+#doc_navi {
+  border-color: #f3f3f3;
+  border-width: 1px;
+  /*background: #f7f7f7;*/
+  border-style: solid
+}
+
+#doc_navi li {
+  margin: 2px;
+  padding: 4px;
+}
+
+#doc_navi li a {
+  margin: 0;
+  padding: 0;
+}
+
+#doc_content {
+  
+  padding: 15px;
+}

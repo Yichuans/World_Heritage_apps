@@ -3,8 +3,11 @@
 <div>
 
 <!-- <h2 id='mytest'>h222222</h2> -->
-
+<h2>h2</h2>
 </div>
+
+<!-- this is where the main document fits -->
+
 <div id='mycontent'>
 </div>
 
@@ -18,18 +21,9 @@ $.get(url, function(data){
 	$('#mycontent').html(d2.mycontent);
 
 	// add anchor in navigation bar
-	$('#mycontent h2').each(function(){
-	
-		//$(this).append('<a href="#' + $(this).html() + '"/>');
-//    		$(this).attr({
-//    			'id': $(this).html()
-//    		})
-
-		//$(this).append('<a href="#' + $(this).html() + '">' + '#</a>');
-	
+	$('#mycontent h2').each(function(){	
 		$('#doc_navi ul').append('<li><a href="#' + $(this).html() + '">' + $(this).html() +'</a></li>');
 	});
-
 
 	// add id
 	$('#mycontent h2').each(function(){	
@@ -38,21 +32,12 @@ $.get(url, function(data){
 			'id': $(this).html()
 		});
 		
-		// add a link		
-		//$(this).append('<a href="#' + $(this).html() + '">' + 'link</a>');
 	});
-
-
-
-
 
 });
 
-
-
-$(document).ready(function() {
-	//url = "http://127.0.0.1:8000/test/default/wcmcdatasheet_render/wcmcdatasheet/" + "{{=wdpaid}}";
-	});
-
-
+  $(document).ready(function(){
+	$("#doc_navi").stick_in_parent();
+  });
+ 
 </script>

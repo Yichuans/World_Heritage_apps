@@ -41,3 +41,10 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Directory for web2py
+errors/**
+sessions/**
+# pyc file
+**.pyc
+
