@@ -145,8 +145,16 @@ def bs_wh_html_h2_anchor(wh_html):
     anchor_tuples = list()
 
     for each_h2 in h2_list:
-        # get the valid name
-        anchor_name = ''.join(each_h2.strings)
+        # get the valid name and keep 'and' lowercase and 'IUCN' upper
+        anchor_name = ''.join(each_h2.strings).lower().title()
+        if 'And' in anchor_name:
+            anchor_name = anchor_name.replace('And', 'and')
+        if 'Of' in anchor_name:
+            anchor_name = anchor_name.replace('Of', 'of')        
+        if 'Iucn' in anchor_name:
+            anchor_name = anchor_name.replace('Iucn', 'IUCN')
+
+        # create anchor    
         anchor = slugify(''.join(each_h2.strings))
         anchor_tuples.append((anchor, anchor_name))
 
@@ -182,11 +190,16 @@ def wh_html():
     anchor_tuples = bs_wh_html_h2_anchor(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
 
     div_navi = DIV(_id = 'doc_navi')
+    # header
+    p = P('Table of Content:', _id='toc')
+    div_navi.append(p)
+
+    # toc
     ul = UL(_class = 'nav nav-pills nav-stacked', _role="tablist")
 
     for anchor, anchor_name in anchor_tuples:
         # add each anchor element
-        ul.append(LI(A(anchor_name, _href = URL('wh_html', args=[wdpaid,]) + '#' + str(anchor))))
+        ul.append(LI(A(anchor_name, _class = 'adjusted_anchor', _href = URL('wh_html', args=[wdpaid,]) + '#' + str(anchor))))
 
     div_navi.append(ul)
 
@@ -222,6 +235,13 @@ def edit_wh_html():
             response.flash = 'Error: not updated!'
 
     return dict(form=form)
+
+
+
+# ============== test
+def _test_():
+    wdpaid = 191
+    return bs_wh_html_h2_anchor(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
 
 def hello():
     return dict()

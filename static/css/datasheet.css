@@ -7,7 +7,7 @@
 #doc_navi {
   border-color: #f3f3f3;
   border-width: 1px;
-  /*background: #f7f7f7;*/
+  background: #ffffff;
   border-style: solid
 }
 
@@ -22,6 +22,22 @@
 }
 
 #doc_content {
-  
+  background: #ffffff;
   padding: 15px;
+}
+
+a.adjusted_anchor {
+
+}
+/*#main {
+    padding-top: 80px;
+    margin-top: -60px;
+}*/
+
+body {
+  background: #f7f7f7;
+}
+
+#toc {
+  font-size:20px;
 }
