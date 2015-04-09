@@ -123,11 +123,26 @@ def bs_wh_html_add_h2_id(wh_html):
     h2_list = soup('h2')
 
     for each_h2 in h2_list:
-        # get the valid name
+        # get the valid name for id
         new_string = slugify(''.join(each_h2.strings))
         each_h2['id'] = new_string
 
+        # replace the name as well
+        each_h2.string = render_h2_beautify(each_h2)
+
     return soup.prettify()
+
+def render_h2_beautify(bs_h2):
+    newstring = ''.join(bs_h2.strings).lower().title()
+    if 'And' in newstring:
+        newstring = newstring.replace('And', 'and')
+    if 'Of' in newstring:
+        newstring = newstring.replace('Of', 'of')        
+    if 'Iucn' in newstring:
+        newstring = newstring.replace('Iucn', 'IUCN')
+       
+    return newstring
+
 
 def bs_wh_html_h2_anchor(wh_html):
     """use BeautifulSoup to create anchor for each heading using safe strings
@@ -146,13 +161,7 @@ def bs_wh_html_h2_anchor(wh_html):
 
     for each_h2 in h2_list:
         # get the valid name and keep 'and' lowercase and 'IUCN' upper
-        anchor_name = ''.join(each_h2.strings).lower().title()
-        if 'And' in anchor_name:
-            anchor_name = anchor_name.replace('And', 'and')
-        if 'Of' in anchor_name:
-            anchor_name = anchor_name.replace('Of', 'of')        
-        if 'Iucn' in anchor_name:
-            anchor_name = anchor_name.replace('Iucn', 'IUCN')
+        anchor_name = render_h2_beautify(each_h2)
 
         # create anchor    
         anchor = slugify(''.join(each_h2.strings))
@@ -191,7 +200,7 @@ def wh_html():
 
     div_navi = DIV(_id = 'doc_navi')
     # header
-    p = P('Table of Content:', _id='toc')
+    p = H3('Table of Content:', _id='toc')
     div_navi.append(p)
 
     # toc
@@ -207,6 +216,63 @@ def wh_html():
     content_html = bs_wh_html_add_h2_id(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
 
     div_content = DIV(_id = 'doc_content')
+    div_content.append(XML(content_html))
+
+    # last update text
+    lastupdate_text = get_last_updated(wdpaid)
+
+    return dict(mycontent = div_content, mynavi = div_navi, lastupdate = lastupdate_text)
+
+def wh_html_bs():
+    # show page bootstrap CSS
+    wdpaid = request.args[0]
+
+    # get anchor navi
+    anchor_tuples = bs_wh_html_h2_anchor(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
+
+    div_navi = DIV(_class="col-xs-6 col-sm-3 sidebar-offcanvas", _id="sidebar", _role="navigation")
+
+    # header
+    p = H3('Table of Content:', _id='toc')
+    div_navi.append(p)
+
+    # toc
+    ul = UL(_class='nav')
+
+    for anchor, anchor_name in anchor_tuples:
+        # add each anchor element
+        ul.append(LI(A(anchor_name, _href = URL('wh_html_bs', args=[wdpaid,]) + '#' + str(anchor))))
+
+    div_navi.append(ul)
+
+    # main html
+    content_html = bs_wh_html_add_h2_id(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
+
+    div_content = DIV(_class ='col-xs-12 col-sm-9')
+    div_content.append(XML(content_html))
+
+    # last update text
+    lastupdate_text = get_last_updated(wdpaid)
+
+    return dict(mycontent = div_content, mynavi = div_navi, lastupdate = lastupdate_text)
+
+def wh_html_bs2():
+    # show page bootstrap CSS
+    wdpaid = request.args[0]
+
+    # get anchor navi
+    anchor_tuples = bs_wh_html_h2_anchor(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
+
+    div_navi = list()
+
+    for anchor, anchor_name in anchor_tuples:
+        # add each anchor element
+        div_navi.append(LI(A(anchor_name, _href = '#' + str(anchor))))
+
+    # main html
+    content_html = bs_wh_html_add_h2_id(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
+
+    div_content = DIV()
     div_content.append(XML(content_html))
 
     # last update text

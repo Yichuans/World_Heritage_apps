@@ -1,0 +1,16 @@
+{{left_sidebar_enabled=True}}
+{{extend 'layout_wh_test_bs.html'}}
+
+<!-- this is where the main document fits -->
+{{=mycontent}}
+
+
+<!-- navigation bar -->
+{{block left_sidebar}}
+{{=mynavi}}
+{{end}}
+
+<!-- last updated -->
+{{block last_updated}}
+{{=lastupdate}}
+{{end}}

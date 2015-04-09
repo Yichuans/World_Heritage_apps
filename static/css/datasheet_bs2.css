@@ -1,0 +1,96 @@
+/*
+A Bootstrap 3.1 affix sidebar template
+from http://bootply.com
+
+This CSS code should follow the 'bootstrap.css'
+in your HTML file.
+
+license: MIT
+author: bootply.com
+*/
+
+body {
+ position: relative;
+ padding-top:50px;
+}
+
+#masthead { 
+ min-height:250px;
+ background: url('../mypicture/191.jpg') center center no-repeat;
+ opacity: 0.8;
+ margin-bottom: 30px;
+}
+
+#masthead h1 {
+ font-size: 30px;
+ text-shadow: 2px 2px #222;
+ color: white;
+ line-height: 1;
+ padding-top:20px;
+}
+
+#masthead .well {
+ margin-top:8%;
+}
+
+@media screen and (min-width: 768px) {
+  #masthead h1 {
+    font-size: 50px;
+  }
+}
+
+.navbar-bright {
+ background-color:#111155;
+ color:#fff;
+}
+
+.affix-top,.affix,.affix-bottom{
+ position: static;
+}
+
+@media (min-width: 979px) {
+#sidebar.affix-top {
+    position: static;
+    margin-top:3px;
+    width:228px;
+  }
+  
+#sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:228px;
+  }
+
+#sidebar.affix-bottom {
+    position: absolute;
+    width:229px;
+}
+}
+
+#sidebar li.active {
+  border:0 #577492 solid;
+  border-right-width:3px;
+  background: #f8f8f8;
+}
+
+#sidebar li a {
+  /*color: #666;*/
+  color: #111;
+  font-size: 12px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+#rightCol h2 {
+  font-size: 20px;
+  border-bottom: 1.5px solid #e7e7e7;
+}
+
+#footer {
+  min-height:250px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border: 0 #e7e7e7 solid;
+  border-top-width: 1px;
+  background-color: #f8f8f8;
+}
