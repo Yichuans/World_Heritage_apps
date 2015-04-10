@@ -15,8 +15,9 @@ body {
 }
 
 #masthead { 
- min-height:250px;
+ min-height:200px;
  background: url('../mypicture/191.jpg') center center no-repeat;
+ background-size: cover;
  opacity: 0.8;
  margin-bottom: 30px;
 }
