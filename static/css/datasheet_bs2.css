@@ -11,7 +11,13 @@ author: bootply.com
 
 body {
  position: relative;
- padding-top:50px;
+ padding-top: 50px;
+
+}
+
+#mytitle a {
+  font-family: sans-serif;
+  font-size: 20px;
 }
 
 #masthead { 
@@ -24,6 +30,7 @@ body {
 
 #masthead h1 {
  font-size: 30px;
+ font-variant: small-caps;
  text-shadow: 2px 2px #222;
  color: white;
  line-height: 1;
@@ -43,6 +50,10 @@ body {
 .navbar-bright {
  background-color:#111155;
  color:#fff;
+}
+
+#leftCol {
+padding-bottom: 10px;
 }
 
 .affix-top,.affix,.affix-bottom{
@@ -74,9 +85,13 @@ body {
   background: #f8f8f8;
 }
 
+#sidebar li.active a {
+  color: #315171;
+  font-size:14px;
+}
+
 #sidebar li a {
-  /*color: #666;*/
-  color: #111;
+  color: #818181;
   font-size: 12px;
   padding-top: 2px;
   padding-bottom: 2px;
@@ -84,7 +99,14 @@ body {
 
 #rightCol h2 {
   font-size: 20px;
-  border-bottom: 1.5px solid #e7e7e7;
+  color: #315171;
+  border-bottom: 1.5px solid #e1e1e1;
+}
+
+#rightCol p {
+  /*font-family: 'Open Sans';*/
+  /*font-weight: lighter;*/
+
 }
 
 #footer {

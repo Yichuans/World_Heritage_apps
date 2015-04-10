@@ -16,17 +16,18 @@
     <![endif]-->
 
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="{{=URL('static','css/datasheet_bs2.css')}}" rel='stylesheet'>
 
   </head>
-  <body>
 
+<body>
 <div class="page-container">
   
     <!-- top navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
        <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" id='mytitle'>
                <a class="navbar-brand" href="#">World Heritage Datasheet</a>
             </div>
        </div>
@@ -53,11 +54,11 @@
     <div class="row">
           <!--left-->
         <div class="col-md-3 col-sm-3" id="leftCol">
-        <ul class="nav nav-stacked" id="sidebar">
-        {{for anchor in mynavi:}}
-        {{=anchor}}
-        {{pass}}
-        </ul>
+            <ul class="nav nav-stacked" id="sidebar">
+            {{for anchor in mynavi:}}
+            {{=anchor}}
+            {{pass}}
+            </ul>
         </div>
 
         <!--right-->
@@ -96,14 +97,13 @@ $('#sidebar').affix({
     bottom: function () {
       return (this.bottom = $('#footer').outerHeight(true)) + 10
     }
-
     }
   }
 );
 
 /* activate scrollspy menu */
 var $body   = $(document.body);
-var navHeight = $('.navbar').outerHeight(true) + 10;
+var navHeight = $('.navbar').outerHeight(true) +10;
 
 $body.scrollspy({
     target: '#leftCol',
