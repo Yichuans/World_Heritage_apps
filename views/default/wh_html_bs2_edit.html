@@ -16,8 +16,8 @@
     <![endif]-->
 
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="{{=URL('static','css/datasheet_bs2.css')}}" rel='stylesheet'>
+    <link href="{{=URL('static','css/codemirror.css')}}" rel='stylesheet'>
 
   </head>
 
@@ -49,21 +49,27 @@
 
 
     <!-- main content -->
-    <div class="container">
+    <div class="container-fluid">
 
     <div class="row">
           <!--left-->
-        <div class="col-md-3 col-sm-3" id="leftCol">
-            <ul class="nav nav-stacked" id="sidebar">
-            {{for anchor in mynavi:}}
-            {{=anchor}}
-            {{pass}}
-            </ul>
+        <div class="col-md-6 col-sm-6" id="leftCol">
+          <div id='edit_area'>
+            {{=form.custom.begin}}
+            <h2>Markdown</h2>
+
+            <div>
+            {{=form.custom.widget.markdown}}
+            </div>
+            {{=form.custom.submit}}
+            {{=form.custom.end}}
+          </div>
+
         </div>
 
         <!--right-->
-        <div class="col-md-9 col-sm-9" id='rightCol'>
-        {{=mycontent}}
+        <div class="col-md-6 col-sm-6" id='rightCol'>
+          {{=preview}}
         </div>
 
     </div>
@@ -76,7 +82,6 @@
         <div class='container'>
         <div class='row'>
             <div class='col-md12'>
-                {{=lastupdate}}
             </div>
         </div>
         </div>
@@ -88,42 +93,30 @@
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{=URL('static','js/codemirror.js')}}" ></script>
+<script type="text/javascript" src="{{=URL('static','js/markdown.js')}}" ></script>
+
+<!-- code mirror -->
 <script>
+ var myCodeMirror = CodeMirror.fromTextArea($('#no_table_markdown')[0], {
+    "mode":  {name:"markdown",fencedCodeBlocks:true, underscoresBreakWords:false},
+    "indentUnit": "4",
+    "showCursorWhenSelecting": true,
+    "lineWrapping": true,
+    "autofocus": true,
+    "lineNumbers": true
+ });
 
-/* activate sidebar */
-$('#sidebar').affix({
-  offset: {
-    top: 235,
-    bottom: function () {
-      return (this.bottom = $('#footer').outerHeight(true)) + 10
-    }
-    }
-  }
-);
+ // set height
+ myCodeMirror.setSize("100%", "100%");
 
-/* activate scrollspy menu */
-var $body   = $(document.body);
-var navHeight = $('.navbar').outerHeight(true) +10;
+function updateHtmlPreview() {
+    $.post("{{=URL('ajax_wh_mkd_to_html')}}", {'mkd': myCodeMirror.getValue()})
+        .done(function(data) {
+          $("#rightCol").html(data)});
+}
 
-$body.scrollspy({
-    target: '#leftCol',
-    offset: navHeight
-});
-
-/* smooth scrolling sections */
-$('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top - 50
-        }, 1000);
-        return false;
-      }
-    }
-});
-
+myCodeMirror.on("keyup", updateHtmlPreview)
 
 </script>
 
@@ -137,6 +130,7 @@ $('a[href*=#]:not([href=#])').click(function() {
   ga('create', 'UA-61833965-1', 'auto');
   ga('send', 'pageview');
 </script>
+
 
 </body>
 </html>

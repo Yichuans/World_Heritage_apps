@@ -76,6 +76,16 @@ def data():
     return dict(form=crud())
 
 ## FUNCTIONS ========================
+def mkd_file_exists(wdpaid):
+    import os
+    mkdfile = os.path.join(request.folder, 'mydata', str(wdpaid) + '.md')
+
+    if os.path.exists(mkdfile):
+        return True
+
+    return False
+
+
 def get_wh_mkd(wdpaid):
     """get wh datasheet in mkd by id"""
     import os
@@ -191,6 +201,10 @@ def slugify(value):
 
 
 ## CONTROLLER ====================== 
+def ajax_wh_mkd_to_html():
+    """ Ajax call to return updated mkd"""
+    return render_wh_mkd_to_html(request.post_vars['mkd'])
+
 def wh_html():
     # show page
     wdpaid = request.args[0]
@@ -260,25 +274,53 @@ def wh_html_bs2():
     # show page bootstrap CSS
     wdpaid = request.args[0]
 
-    # get anchor navi
-    anchor_tuples = bs_wh_html_h2_anchor(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
+    if not mkd_file_exists(wdpaid):
+        raise HTTP(400, 'The page doesn\'t exists or has been removed')
 
+    # get anchor navi ===========
+    anchor_tuples = bs_wh_html_h2_anchor(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
     div_navi = list()
 
     for anchor, anchor_name in anchor_tuples:
         # add each anchor element
         div_navi.append(LI(A(anchor_name, _href = '#' + str(anchor))))
 
-    # main html
+    # main html ============
     content_html = bs_wh_html_add_h2_id(render_wh_mkd_to_html(get_wh_mkd(wdpaid)))
-
     div_content = DIV()
     div_content.append(XML(content_html))
 
-    # last update text
+    # last update text ============
     lastupdate_text = get_last_updated(wdpaid)
 
     return dict(mycontent = div_content, mynavi = div_navi, lastupdate = lastupdate_text)
+
+def wh_html_bs2_edit():
+    # edit page
+    wdpaid = request.args[0] # test 191
+
+    if not mkd_file_exists(wdpaid):
+        raise HTTP(400, 'The page doesn\'t exists or has been removed')
+
+    # create a form to accept updates
+    form = SQLFORM.factory(
+    Field('markdown', 'text', length=9999999999))
+
+    # prepopulate data from text file
+    form.vars.markdown = get_wh_mkd(wdpaid)
+
+    # update the record
+    if form.process(keepvalues=True).accepted:
+        if write_wh_mkd(wdpaid, request.post_vars.markdown):
+            response.flash = 'form accepted and record updated'
+        else:
+            response.flash = 'Error: not updated!'
+
+    # preview
+    preview = DIV()
+    preview.append(XML(render_wh_mkd_to_html(get_wh_mkd(wdpaid))))
+
+    return dict(form=form, preview=preview)
 
 def edit_wh_html():
     # edit page
