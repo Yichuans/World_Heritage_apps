@@ -10,6 +10,6 @@ It uses the following software/libraries: Web2py, slugify (Django utility), Boot
 - added GA for tracking traffic
 - WYSIWYG editor for updating
 
-## Remaining implmenetations
+## Remaining implmentations
 - pan-doc to convert existing datasheet in Word to Markdown
 - UI polish
