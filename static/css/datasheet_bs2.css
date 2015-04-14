@@ -60,7 +60,7 @@ padding-bottom: 10px;
  position: static;
 }
 
-@media (min-width: 979px) {
+@media (min-width: 995px) {
 #sidebar.affix-top {
     position: static;
     margin-top:3px;
@@ -75,7 +75,26 @@ padding-bottom: 10px;
 
 #sidebar.affix-bottom {
     position: absolute;
-    width:229px;
+    width:228px;
+}
+}
+
+@media (min-width: 768px) and (max-width: 995px) {
+#sidebar.affix-top {
+    position: static;
+    margin-top:3px;
+    width:165px;
+  }
+  
+#sidebar.affix {
+    position: fixed;
+    top:70px;
+    width:165px;
+  }
+
+#sidebar.affix-bottom {
+    position: absolute;
+    width:165px;
 }
 }
 
@@ -98,7 +117,7 @@ padding-bottom: 10px;
 }
 
 #edit_area {
-  
+
 }
 
 #rightCol h2 {
