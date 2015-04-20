@@ -274,6 +274,8 @@ def wh_html_bs2():
     # show page bootstrap CSS
     wdpaid = request.args[0]
 
+    wh_name = db(db.wh.wdpaid==wdpaid).select()[0].name
+
     if not mkd_file_exists(wdpaid):
         raise HTTP(400, 'The page doesn\'t exists or has been removed')
 
@@ -293,7 +295,7 @@ def wh_html_bs2():
     # last update text ============
     lastupdate_text = get_last_updated(wdpaid)
 
-    return dict(mycontent = div_content, mynavi = div_navi, lastupdate = lastupdate_text)
+    return dict(wh_name=wh_name, mycontent = div_content, mynavi = div_navi, lastupdate = lastupdate_text)
 
 def wh_html_bs2_edit():
     # edit page

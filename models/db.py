@@ -82,7 +82,7 @@ use_janrain(auth, filename='private/janrain.key')
 
 db.define_table('person', Field('wdpaid'), Field('name','text', length='9999999'))
 
-db.define_table('wcmcdatasheet', Field('wdpaid'), Field('wh','text', length='9999999'))
+db.define_table('wh', Field('wdpaid', 'integer'), Field('name','text', length='200'))
 
 #########################################################################
 

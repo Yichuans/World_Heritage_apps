@@ -71,3 +71,11 @@ CREATE TABLE wcmcdatasheet(
     wh TEXT
 );
 success!
+timestamp: 2015-04-20T15:46:19.624000
+CREATE TABLE wh(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    wdpaid CHAR(512),
+    name TEXT
+);
+success!
+success!
