@@ -15,7 +15,7 @@ It uses the following software/libraries: Web2py, slugify (Django utility), Boot
 - UI polish
 
 ## Working example
-- here is the [link] to the datasheet (http://52.16.74.158/wh_datasheet/default/wh_html_bs2/191)
+- here is the [link](http://52.16.74.158/wh_datasheet/default/wh_html_bs2/191) to the datasheet 
 
-## other protos
-- here is the [link] to the landcover change product (http://52.16.74.158/wh_datasheet/landcover/conv_matrix/5005)
+## Other protos
+- here is the [link](http://52.16.74.158/wh_datasheet/landcover/conv_matrix/5005) to the landcover change product 
