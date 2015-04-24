@@ -79,3 +79,12 @@ CREATE TABLE wh(
 );
 success!
 success!
+timestamp: 2015-04-24T14:11:11.138000
+CREATE TABLE landcover(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    wdpaid INTEGER,
+    lc_2000 TEXT,
+    lc_2010 TEXT,
+    areakm2 DOUBLE
+);
+success!

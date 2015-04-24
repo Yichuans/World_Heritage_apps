@@ -84,6 +84,11 @@ db.define_table('person', Field('wdpaid'), Field('name','text', length='9999999'
 
 db.define_table('wh', Field('wdpaid', 'integer'), Field('name','text', length='200'))
 
+db.define_table('landcover', Field('wdpaid', 'integer'),
+    Field('lc_2000', 'text'),
+    Field('lc_2010', 'text'),
+    Field('areakm2', 'double'))
+
 #########################################################################
 
 ## after defining tables, uncomment below to enable auditing

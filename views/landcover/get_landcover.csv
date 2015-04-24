@@ -1,0 +1,22 @@
+{{
+import cStringIO
+stream=cStringIO.StringIO()
+colnames=map(lambda c: c.split('.')[1], landcover.colnames) # get rid of the table part
+landcover.export_to_csv_file(stream, delimiter=",")
+
+response.headers['Content-Type']='text/csv'
+
+
+stream.seek(0)
+
+# make sure the last element does not have '\r\n'
+data = stream.readlines()[1:]
+data[-1] = data[-1].strip()
+
+response.write(",".join(colnames) + "\r\n", escape=False)
+response.write(''.join(data), escape=False)
+
+
+# response.write("".join(stream.readlines()[1:]), escape=False)
+
+}} 
