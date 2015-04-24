@@ -19,4 +19,3 @@ It uses the following software/libraries: Web2py, slugify (Django utility), Boot
 
 ## other protos
 - here is the [link] to the landcover change product (http://52.16.74.158/wh_datasheet/landcover/conv_matrix/5005)
-- 
