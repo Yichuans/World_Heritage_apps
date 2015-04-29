@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Natural World Heritage Landcover change</title>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{=URL('static','css/landcover.css')}}" rel='stylesheet'>
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{=URL('static', 'js/jquery.hideseek.js')}}"></script>
+
+<body>
+
+	<div class="page-container">
+
+		<!-- top navbar -->
+		<div class="navbar navbar-default" role="navigation">
+			<div class="container">
+				<div class="navbar-header" id='mytitle'>
+						<a class="navbar-brand" href="#">Landcover change in natural World Heritage sites</a>
+					</div>
+				</div>
+		</div>
+
+
+		<!-- master head -->
+		<div id='#head_lc'> 
+			<div class="container">
+				<div class="row">
+					<div class='col-md-12'>
+						<h1>Landcover Change 2000 - 2010</h1>
+					</div>
+				</div> 
+			</div>
+		</div>
+
+
+		<!-- main content -->
+		<div class="container">
+
+			<div class="row">
+				<div class='col-md-12 search-box'>
+					<div class="input-group">
+						<span class="input-group-addon" id="sizing-addon1">Filter by name</span>
+						<input id='mysearch' name="search" class='form-control' placeholder="Natural World Heritage site" type="text" data-list=".mylist" aria-describedby="sizing-addon1">
+					</div>
+				</div>
+
+				<div class='col-md-12'>
+					<ul class="list-unstyled mylist">
+						{{for element in li:}}
+						{{=element}}
+						{{pass}}
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+
+	$(document).ready(function() {
+		$('#mysearch').hideseek({
+			highlight: true,
+			nodata: 'No results found',
+			ignore_accents: true
+		});
+	});
+
+
+</script>
+
+</body>

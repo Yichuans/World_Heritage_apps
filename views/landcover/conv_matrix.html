@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
-<title>SANKEY with auto links</title>
+<title>Natural World Heritage Landcover change</title>
 <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
 <link href="{{=URL('static','css/datasheet_bs2.css')}}" rel='stylesheet'>
 
@@ -41,7 +41,7 @@
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
        <div class="container">
             <div class="navbar-header" id='mytitle'>
-               <a class="navbar-brand" href="#">Landcover Change (2000 - 2010) in natural World Heritage sites</a>
+               <a class="navbar-brand" href="#">Landcover change (2000 - 2010) in natural World Heritage sites</a>
             </div>
        </div>
     </div>
@@ -71,6 +71,16 @@
           </div>
       </div>
 
+      <hr>
+      <div class="row">
+          <div class='col-md-12'>
+            <div>
+              <p style="text-align:right;">Based on the <a href='http://www.globallandcover.com/GLC30Download/index.aspx'>GlobeLand30</a> data <br><small>National Geomatics Centre of China</small></p>
+            </div>
+          </div>
+      </div>
+
+
     </div>
 
 
@@ -81,7 +91,6 @@
 <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 <script src="http://d3js.org/d3.v3.js"></script>
-<script src="sankey.js"></script>
 <script src="{{=URL('static','js/sankey.js')}}"></script>
 
 <script>

@@ -1,0 +1,33 @@
+.mylist {
+	border:0 #e1e1e1 solid;
+	padding-left: 5px;
+	border-left-width: 1px;
+}
+
+.mylist li {
+	padding-bottom: 5px;
+}
+
+.mylist li a {
+  color: #818181;
+  /*font-size: 12px;*/
+  padding-top: 5px;
+  padding-left: 5px
+}
+
+.mylist li a:hover {
+  /*transition-property: font-size;*/
+  /*transition-duration: 0.2s;*/
+  /*transition-delay: 2s;*/
+  color: #a22;
+  /*font-size: 16px;*/
+/*  border:0 #577492 solid;
+  border-left-width:3px;*/
+  /*background: #f8f8f8;*/
+}
+
+.search-box {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+

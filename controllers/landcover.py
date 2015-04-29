@@ -2,8 +2,13 @@
 
 # ========== controller
 def index():
-    result = db().select(db.wh.ALL)
-    return dict(result=result)
+    result = db().select(db.wh.name, db.wh.wdpaid, orderby=db.wh.name)
+
+    li = list()
+    for each in result:
+        li.append(LI(A(each.name, _href = URL('conv_matrix', args = [str(each.wdpaid)]), _target="_blank")))
+
+    return dict(li=li)
 
 
 def get_landcover():
@@ -12,12 +17,18 @@ def get_landcover():
     """
     wdpaid = request.args[0]
     landcover = db(db.landcover.wdpaid==wdpaid).select(db.landcover.lc_2000, db.landcover.lc_2010, db.landcover.areakm2)
+
+
     return dict(landcover=landcover)
 
 def conv_matrix():
     wdpaid = request.args[0]
-    wh_name = db(db.wh.wdpaid==wdpaid).select()[0].name
+    query = db(db.wh.wdpaid==wdpaid).select()
 
+    if len(query) == 0:
+        raise HTTP(400, 'The wdpaid doesn\'t exists, invalid or has been removed')
+
+    wh_name = query[0].name
     return dict(wh_name=wh_name, wdpaid=wdpaid)
 
 
