@@ -88,3 +88,10 @@ CREATE TABLE landcover(
     areakm2 DOUBLE
 );
 success!
+timestamp: 2015-04-30T14:52:49.238000
+CREATE TABLE wh_geom(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    wdpaid INTEGER,
+    geo_json TEXT
+);
+success!

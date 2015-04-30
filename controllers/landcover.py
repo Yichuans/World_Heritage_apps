@@ -34,4 +34,5 @@ def conv_matrix():
 
 
 def test_map():
-    return dict()
+    result = db(db.wh_geom.wdpaid==191).select(db.wh_geom.geo_json)[0].geo_json
+    return dict(result=result)

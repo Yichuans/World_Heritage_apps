@@ -32,7 +32,34 @@
 }
 
 
-#mymap {
+.mymap {
   height: 300px;
   width: 100%;
 }
+
+#lg {
+  padding: 10px 10px 10px 10px;
+  background-color: #eee;
+}
+
+#lg ul, li {
+    padding-left: 0px;
+    padding-top: 5px;
+    list-style: outside none none;
+}
+
+#lg li .color {
+    border: 1px solid #555;
+    float: left;
+    margin-right: 5px;  
+    width: 16px;
+    height: 16px;
+}
+
+#lg li .text {
+    margin-left: 5px;
+    /*font-size:12px;*/
+    /*white-space: pre-wrap;*/
+    /*white-space: nowrap;*/
+}
+
