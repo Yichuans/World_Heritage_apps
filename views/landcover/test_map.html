@@ -5,7 +5,12 @@
 <link href="{{=URL('static','css/landcover.css')}}" rel='stylesheet'>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{{=URL('static', 'js/jquery.hideseek.js')}}"></script>
+<!-- Leaflet dependencies -->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<!-- mapbox dependencies -->
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
 
 <body>
     <div class="page-container">
@@ -30,28 +35,27 @@
         <!-- main content -->
         <div class="container">
             <div class="row">
-                <div class='col-md-12 search-box'>
-                    <div class="input-group">
-                        <span class="input-group-addon" id="sizing-addon1">Filter by name</span>
-                        <input id='mysearch' name="search" class='form-control' placeholder="Natural World Heritage site" type="text" data-list=".mylist" aria-describedby="sizing-addon1">
-                    </div>
-                </div>
                 <div class='col-md-12'>
-                    <ul class="list-unstyled mylist">
-                        {{for element in li:}} {{=element}} {{pass}}
-                    </ul>
+                    <div id="mymap"></div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
     <script>
-    $(document).ready(function() {
-        $('#mysearch').hideseek({
-            highlight: true,
-            nodata: 'No results found',
-            ignore_accents: true
-        });
+
+    $(document).ready(function(){
+
+
+        L.mapbox.accessToken = 'pk.eyJ1IjoieWljaHVhbnMiLCJhIjoidE5BeWp5YyJ9.JHJC2OHJioJOHkCY3CrHYA';
+
+        var map = L.map('mymap').setView([51.505, -0.09], 13);
+
+        var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v4/yichuans.34d0d4fe/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+            attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+        }).addTo(map);
+
     });
+
     </script>
-</body>
+    </body>

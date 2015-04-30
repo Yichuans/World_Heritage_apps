@@ -33,3 +33,5 @@ def conv_matrix():
 
 
 
+def test_map():
+    return dict()
