@@ -35,31 +35,46 @@
 .mymap {
   height: 300px;
   width: 100%;
+  border: 0.5px solid #eee;
 }
 
 #lg {
   padding: 10px 10px 10px 10px;
-  background-color: #eee;
+  /*background-color: #eee;*/
 }
 
-#lg ul, li {
-    padding-left: 0px;
-    padding-top: 5px;
-    list-style: outside none none;
+#lg ul {
+  padding-left: 0px;
+}
+
+#lg ul li {
+  display: inline-block;
+  margin-right: 10px;
+  list-style-type: none;
 }
 
 #lg li .color {
-    border: 1px solid #555;
-    float: left;
-    margin-right: 5px;  
-    width: 16px;
-    height: 16px;
+  border: 1px solid #555;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  float: left;
+  margin-right: 2px;
 }
 
 #lg li .text {
-    margin-left: 5px;
-    /*font-size:12px;*/
-    /*white-space: pre-wrap;*/
-    /*white-space: nowrap;*/
+  float: left;
 }
 
+
+.vis_element {
+  margin-bottom: 5px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+#mysvg {
+  overflow: hidden;
+  margin: auto;
+  display: block;
+}

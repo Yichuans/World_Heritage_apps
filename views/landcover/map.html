@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Natural World Heritage Landcover change</title>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{=URL('static','css/landcover.css')}}" rel='stylesheet'>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<!-- Leaflet dependencies -->
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+<!-- mapbox dependencies -->
+<script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+
+<body>
+    <div class="page-container">
+        <!-- top navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header" id='mytitle'>
+                    <a class="navbar-brand" href="#">Landcover change in natural World Heritage sites</a>
+                </div>
+            </div>
+        </div>
+        <!-- master head -->
+        <div id='#head_lc'>
+            <div class="container">
+                <div class="row">
+                    <div class='col-md-12'>
+                        <h1>{{=wh_name}} <small>Landcover Change 2000 - 2010</small></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+        <div class="container">
+            <div class="row">
+                <div class='col-md-5 col-sm-12 vis_element'>
+                    <h3>2000</h3>
+                    <div id="map1" class='mymap'></div>
+
+                </div>
+                <div class='col-md-5 col-sm-12 vis_element'>
+                    <h3>2010</h3>
+                    <div id="map2" class='mymap'></div>
+
+                </div>
+                <div class='col-md-2 col-sm-12 vis_element'>
+                <div id="lg">
+                <h3>Legend</h3>
+                <ul>
+                    <li>
+                        <div style="background-color: rgb(249,243,193);" class="color">
+                        </div>
+                        <div class="text">Cultivated land</div>
+                    </li>
+
+                    <li>
+                        <div style="background-color: rgb(20,119,73);" class="color">
+                        </div>
+                        <div class="text">Forest</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(169,208,95);" class="color">
+                        </div>
+                        <div class="text">Grasslands</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(62,179,112);" class="color">
+                        </div>
+                        <div class="text">Shrublands</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(126,206,244);" class="color">
+                        </div>
+                        <div class="text">Wetland</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(0,68,154);" class="color">
+                        </div>
+                        <div class="text">Water bodies</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(100,100,50);" class="color">
+                        </div>
+                        <div class="text">Tundra</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(147,47,20);" class="color">
+                        </div>
+                        <div class="text">Artificial Surfaces</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(202,202,202);" class="color">
+                        </div>
+                        <div class="text">Bareland</div>
+                    </li>
+                    <li>
+                        <div style="background-color: rgb(211,237,251);" class="color">
+                        </div>
+                        <div class="text">Permanent snow and ice</div>
+                    </li>
+                </ul>
+                </div>
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class='col-md-12'>
+                    <div>
+                        <p style="text-align:right;">Based on the <a href='http://www.globallandcover.com/GLC30Download/index.aspx'>GlobeLand30</a> data
+                            <br><small>National Geomatics Centre of China</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+    $(document).ready(function(){
+        // global land cover 30 NGCC
+        var cglc2000 = L.tileLayer.wms("http://218.244.250.80:8080/erdas-apollo/coverage/CGLC", {
+            layers: 'cglc30_2000_0',
+            format: "image/png",
+            transparent: true
+        });
+
+        var cglc2010 = L.tileLayer.wms("http://218.244.250.80:8080/erdas-apollo/coverage/CGLC", {
+            layers: 'cglc30_2010_0',
+            format: "image/png",
+            transparent: true
+        });
+
+
+        //creates json object
+        var wh_geom = {{=XML(wh_geo_json)}};
+
+        // get json layer
+        var f_lyr = L.geoJson(wh_geom);
+
+
+        // mapbox tiles basemap - not used here
+        L.mapbox.accessToken = 'pk.eyJ1IjoieWljaHVhbnMiLCJhIjoidE5BeWp5YyJ9.JHJC2OHJioJOHkCY3CrHYA';
+        
+        var mapboxTiles = L.tileLayer('https://{s}.tiles.mapbox.com/v4/yichuans.34d0d4fe/{z}/{x}/{y}.png?access_token=' + L.mapbox.accessToken, {
+            attribution: '<a href="http://www.mapbox.com/about/maps/" target="_blank">Terms &amp; Feedback</a>'
+        });
+
+
+        // test map 1
+        var map1 = L.map('map1');
+        map1.addLayer(cglc2000);
+        map1.addLayer(f_lyr);
+        map1.fitBounds(f_lyr.getBounds());
+
+
+        // test map 2
+        var f_lyr2 = L.geoJson(wh_geom);
+     
+        var map2 = L.map('map2');
+        map2.addLayer(cglc2010);
+        map2.addLayer(f_lyr2);
+        map2.fitBounds(f_lyr2.getBounds());
+
+        // update bounds
+        var updateBounds = function(e){
+            // console.log(this.getBounds())
+            // console.log(e);
+            newbounds = this.getBounds()
+            map1.fitBounds(newbounds);
+            map2.fitBounds(newbounds);
+        };
+
+        // listen for events
+        map1.on('dragend zoomend', updateBounds);
+        map2.on('dragend zoomend', updateBounds);       
+
+
+    });
+
+    </script>
+    </body>

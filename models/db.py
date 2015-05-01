@@ -90,7 +90,7 @@ db.define_table('landcover', Field('wdpaid', 'integer'),
     Field('areakm2', 'double'))
 
 db.define_table('wh_geom', Field('wdpaid', 'integer'),
-    Field('geo_json', 'text'))
+    Field('geo_json', 'text', length='99999999'))
 
 
 #########################################################################
