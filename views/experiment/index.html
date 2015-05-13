@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Experiment</title>
+<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js"></script>
+
+<style type="text/css">
+
+    .holder {
+        display: inline-block;
+        height: 200px;
+        margin-bottom: 10px;
+        vertical-align: top;
+        margin-right: 3px;
+    }
+
+    .imageblock {
+        /*display: inline-block;*/
+        width: 300px;
+        height: 200px;
+        opacity: 0.5;
+        transition: all 0.2s ease-in-out 0s;
+        background-size: 300px 300px;
+        
+    }
+
+    .imageblock:hover{
+        background-position: 0% 30%;
+        opacity: 1;
+
+    }
+
+    .textholder {
+        top: -50px;
+        vertical-align: middle;
+
+        padding-top:auto;
+        padding-bottom: auto;
+        background-color: #444;
+        display: table;
+
+        width: 300px;
+        height: 50px;
+
+        position: relative; /*to float*/
+        opacity: 0.9;
+    }
+
+    .wh_text {
+        margin-bottom: 0;
+        margin-top: 0;
+
+        display: table-cell;
+        vertical-align: middle;
+
+        font-size: 14px;
+        text-align: center;
+        color:white;
+        /*text-shadow: 1px 1px #555555; */
+    }
+
+</style>
+
+<body>
+    <div class="page-container">
+        <!-- top navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <div class="navbar-header" id='mytitle'>
+                    <a class="navbar-brand" href="#">Experiement</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- master head -->
+        <div id='#head_lc'>
+            <div class="container">
+                <div class="row">
+                    <div class='col-md-12'>
+                        <h1>Experiment</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- main content -->
+        <div class="container">
+            <div class='col-md-12'>
+                <div class="row" id='mycon'>
+            </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-61833965-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!-- d3 js -->
+<script type="text/javascript">
+    var MAXVALUE = 20;
+    var myformat = d3.format('.2f');
+
+    var mydiv = d3.select('#mycon')
+        .append('div')
+        .attr('id', 'mydiv');
+
+    // for (var i=0;i<100;i++){
+    //     var item =Math.random() *MAXVALUE;
+    //     data.push(item);
+    // }
+
+
+    // d3.json('wh.json', function(data){
+
+    // d3.json("{{=URL('static', 'wh.json')}}", function(data){
+
+        data = data.slice(1, 40);
+
+        var div_holder = mydiv.selectAll('div')
+            .data(data)
+            .enter()
+            .append('div')
+            .attr('class', 'holder')
+
+        //add an image 
+        div_holder
+            .append('div')
+            .attr('class', 'imageblock')
+            .style('background-image', function(d){
+                return 'url(' + d.back + ')';
+            })
+
+        //add text below
+        div_holder
+            .append('div')
+            .attr('class', 'textholder')
+            .append('h2')
+            .attr('class', 'wh_text')
+            .html(function(d){
+                return d.wh_name;
+            });
+
+
+    })
+
+
+
+    // d3.json('data.json', function(data){
+    //     console.log(data);
+
+    //     mydiv.selectAll('div')
+    //         .data(data, function(d){
+    //             return d.a;
+    //         })
+    //         // .data(data)
+    //         .enter()
+    //         .append('div')
+    //         .attr('class', 'imageblock')
+    //         .style('background-image', function(d){
+    //             return 'url(' +  d.back + ')';
+    //         })
+
+    //         .append('h1')
+    //         .html(function(d){
+    //             return d.a;
+    //         })
+
+    // });
+
+
+</script>
