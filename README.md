@@ -16,11 +16,11 @@ It uses the following software/libraries: Web2py, slugify (Django utility), Boot
 - UI polish
 
 ### Working example
-- here is the [link](http://52.16.74.158/wh_datasheet/default/wh_html_bs2/191) to the datasheet 
+- here is the [link](http://52.16.74.158/wh_app/default/wh_html_bs2/191) to the datasheet 
 
 ## World Heritage Landcover change
 A prototype to visualise Landcovers in 2000 and 2010, including quantitative change. A Sankey chart is also included to visualise conversion matrix, i.e., how much of a certain type of landcover has been converted to another.
 It uses the following software/libraries:Web2py, Bootsrap, jQuery, D3js, D3js-Sankey plugin, leaflet. Data courtesy of National Geomatics Centre of China.
 
 ### working example
-- here is the [link](http://52.16.74.158/wh_datasheet/landcover/) to the landcover change product 
+- here is the [link](http://52.16.74.158/wh_app/landcover/) to the landcover change product 
