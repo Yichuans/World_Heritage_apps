@@ -1,9 +1,9 @@
-# World Heritage browser
+# World Heritage applications on the web
+## World Heritage browser
 It is intended to replace the aged KML format of the annual World Heritage spatial data release.
 Off the shelf esri solution with arcgisonline subscription
 - here is the [link] (http://goo.gl/xur7mL) to the application
 
-# World Heritage applications on the web
 ## World Heritage datasheet
 This is a prototype aimed at replacing the old fashioned way of maintaining the World Hertage datasheets through Microsoft Word. Instead, it would be done entirely online and simplify the way it is published and accessed in the future.
 It uses the following software/libraries: Web2py, slugify (Django utility), Bootstrap (+scrollspy), jQuery, python-markdown, bs4, codemirror.
